@@ -1,4 +1,4 @@
-# Movie-Suggestion-Generator
+# Movie-Generator
 - web app suggestion tool which generates a random movie and its details
 
 ## Planned features
