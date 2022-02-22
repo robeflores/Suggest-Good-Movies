@@ -8,16 +8,26 @@
 <p> <b>IMDb Rating:</b> @rating </p>
 <p> <b>Description:</b> @description </p>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<button class="btn btn-primary" @onclick="GetRandomMovie">Generate random movie</button>
 
 @code {
-    private string title = "Movie 1";
-    private int year = 2000;
-    private string genre = "Horror";
-    private string rating = "7.4";
-    private string description = "this movie is about..";
+    private string title = "...";
+    private string year = "...";
+    private string genre = "...";
+    private string rating = "...";
+    private string description = "...";
 
     private void GetRandomMovie(){
-        
+        title = "Movie 1";
+        year = "2000";
+        genre = "Horror";
+        rating = "7.4";
+        description = "this movie is about...";
+    }
+
+    //https://imdb-api.com/en/API/Title/k_12345678/tt0110413
+
+    protected override void OnInitialized(){
+        GetRandomMovie();
     }
 }
