@@ -1,31 +1,39 @@
-﻿@page "/"
+﻿
+@page "/"
+@using BlazorApp.Data
+@inject MovieRandomService RandomService
 
 <PageTitle>Index</PageTitle>
 
 <h2 class='d-flex justify-content-center'> @title </h2>
 <p> <b>Year:</b> @year </p>
-<p> <b>Genre:</b> @genre </p>
+<p> <b>Genres:</b> @genres </p>
 <p> <b>IMDb Rating:</b> @rating </p>
 <p> <b>Description:</b> @description </p>
 
-<button class="btn btn-primary" @onclick="GetRandomMovie">Generate random movie</button>
+<button class="btn btn-primary" @onclick="GetRandomMovie">Suggest new movie</button>
 
 @code {
+
     private string title = "...";
     private string year = "...";
-    private string genre = "...";
+    private string genres = "...";
     private string rating = "...";
     private string description = "...";
 
-    private void GetRandomMovie(){
-        title = "Movie 1";
-        year = "2000";
-        genre = "Horror";
-        rating = "7.4";
-        description = "this movie is about...";
-    }
+    private Movie m;
+    private async void GetRandomMovie(){
+        m = await RandomService.GetMovieAsync();
+        title = m.title;
+        year = m.year;
+        genres = m.genres;
+        rating = m.rating;
+        description = m.description;
 
-    //https://imdb-api.com/en/API/Title/k_12345678/tt0110413
+        //1-9951 max start index
+        //https://www.imdb.com/search/title/?title_type=feature&release_date=1990-01-01,2022-02-23&user_rating=6.0,&start=1&ref_=adv_nxt
+
+    }
 
     protected override void OnInitialized(){
         GetRandomMovie();
