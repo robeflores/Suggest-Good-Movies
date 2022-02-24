@@ -22,17 +22,13 @@
     private string description = "...";
 
     private Movie m;
-    private async void GetRandomMovie(){
-        m = await RandomService.GetMovieAsync();
+    private void GetRandomMovie(){
+        m = RandomService.GetMovie();
         title = m.title;
         year = m.year;
         genres = m.genres;
         rating = m.rating;
         description = m.description;
-
-        //1-9951 max start index
-        //https://www.imdb.com/search/title/?title_type=feature&release_date=1990-01-01,2022-02-23&user_rating=6.0,&start=1&ref_=adv_nxt
-
     }
 
     protected override void OnInitialized(){
