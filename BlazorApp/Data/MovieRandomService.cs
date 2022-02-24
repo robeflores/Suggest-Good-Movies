@@ -17,12 +17,18 @@ public class MovieRandomService{
         HtmlAgilityPack.HtmlWeb web = new HtmlAgilityPack.HtmlWeb();
         HtmlAgilityPack.HtmlDocument doc = web.Load(url);
         foreach (var node in doc.DocumentNode.SelectNodes("//*[@class='lister-item-content']")){
-            Console.WriteLine(node.Element("h3").SelectSingleNode("a").InnerText);
+            Console.WriteLine(node.Element("h3").SelectSingleNode("a").InnerText); // Title
+            Console.WriteLine(node.Element("h3").SelectNodes("span").Last().InnerText); // Year
+            Console.WriteLine(node.Descendants("span").Where(span => span.HasClass("genre")).First().InnerText); // Genres
+            Console.WriteLine(node.Descendants("div").Where(div => div.HasClass("ratings-imdb-rating")).First().InnerText);// Rating
+            Console.WriteLine(node.Descendants("p").Where(p => p.HasClass("text-muted")).Last().InnerText);// Description
+            Console.WriteLine("https://www.imdb.com/" + node.Element("h3").SelectSingleNode("a").GetAttributeValue("href", string.Empty)); // link
+            Console.WriteLine("\n\n\n");
         }
 
         Movie m = new Movie("Resident Evil", "1996", "Horror, Mystery", "8.0", "finding themselves in a spooky mansion...");
         return m;
     }
 
-        
+
 }

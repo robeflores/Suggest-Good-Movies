@@ -6,6 +6,7 @@ public class Movie{
     public string? genres { get; set; }
     public string? rating { get; set; }
     public string? description { get; set; }
+    public string? link { get; set; }
 
     public Movie(string title, string year, string genres, string rating, string description) {
         this.title = title;
