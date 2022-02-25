@@ -10,6 +10,7 @@
 <p> <b>Genres:</b> @genres </p>
 <p> <b>IMDb Rating:</b> @rating </p>
 <p> <b>Description:</b> @description </p>
+<p> <b>Link on imdb:</b> <a href=@link target="_blank">click here</a> </p>
 
 <button class="btn btn-primary" @onclick="GetRandomMovie">Suggest new movie</button>
 
@@ -20,6 +21,7 @@
     private string genres = "...";
     private string rating = "...";
     private string description = "...";
+    private string link = "...";
 
     private Movie m;
     private void GetRandomMovie(){
@@ -29,6 +31,7 @@
         genres = m.genres;
         rating = m.rating;
         description = m.description;
+        link = m.link;
     }
 
     protected override void OnInitialized(){

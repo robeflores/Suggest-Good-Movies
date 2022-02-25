@@ -28,7 +28,7 @@ public class MovieRandomService {
         {
             string title = node.Element("h3").SelectSingleNode("a").InnerText;
             string year = node.Element("h3").SelectNodes("span").Last().InnerText;
-            year = year.Replace("(", "").Replace(")", "");
+            year = year.Replace("(", "").Replace(")", "").Replace("I", "").Replace(" ", "");
             string genres = node.Descendants("span").Where(span => span.HasClass("genre")).First().InnerText;
             genres = genres.Replace("\n", "");
             string rating = node.Descendants("div").Where(div => div.HasClass("ratings-imdb-rating")).First().InnerText;
@@ -37,8 +37,9 @@ public class MovieRandomService {
             string description = node.Descendants("p").Where(p => p.HasClass("text-muted")).Last().InnerText;
             description = description.Replace("\n", "");
             string link = "https://www.imdb.com" + node.Element("h3").SelectSingleNode("a").GetAttributeValue("href", string.Empty);
+            link = link.Replace("?ref_=adv_li_tt", "");
 
-            movies.Add(new Movie(title, year, genres, rating, description));
+            movies.Add(new Movie(title, year, genres, rating, description, link));
         }
     }
 

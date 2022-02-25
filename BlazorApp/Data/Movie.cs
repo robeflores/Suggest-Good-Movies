@@ -8,12 +8,13 @@ public class Movie{
     public string? description { get; set; }
     public string? link { get; set; }
 
-    public Movie(string title, string year, string genres, string rating, string description) {
+    public Movie(string title, string year, string genres, string rating, string description, string link) {
         this.title = title;
         this.year = year;
         this.genres = genres;
         this.rating = rating;
         this.description = description;
+        this.link = link;
     }
 }
 
