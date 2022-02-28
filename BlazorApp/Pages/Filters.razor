@@ -1,4 +1,32 @@
-﻿<h3>Filters</h3>
+﻿@page "/filters"
+@using BlazorApp.Data
+@using Microsoft.Extensions.Logging
+@inject ILogger<Filters> Logger
+
+<h3 class='d-flex justify-content-center'>Filters</h3>
+
+<h4>Release Date<i style="font-size: 70%;"> (Format: YYYY)</i></h4>
+
+<EditForm Model="@exampleModel" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <InputText id="since" style="max-width: 60px;" @bind-Value="exampleModel.since" />
+        to <InputText id="until" style="max-width: 60px;" @bind-Value="exampleModel.until" />
+
+    <br /><button style="margin-top: 5em;" type="submit">apply changes</button>
+</EditForm>
+
+@code {
+    private FiltersModel exampleModel = new();
+
+    private void HandleValidSubmit()
+    {
+        Logger.LogInformation("HandleValidSubmit called");
+
+        // Process the valid form
+    }
+}
 
 @code {
 

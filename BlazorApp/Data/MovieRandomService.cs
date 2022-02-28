@@ -10,12 +10,12 @@ public class MovieRandomService {
     public Movie GetMovie() {
         if (movies.Count == 0)
             ScrapeMovies();
-        Random rnd = new Random();
+        Random rnd = new Random((int)DateTime.Now.Ticks & 0x0000FFFF);
         return movies[ rnd.Next(movies.Count) ];
     }
 
     public void ScrapeMovies() {
-        Random rnd = new Random();
+        Random rnd = new Random((int)DateTime.Now.Ticks & 0x0000FFFF);
         int startIndex = 1 + rnd.Next(9950); // 1-9951 max start index
         // https://www.imdb.com/search/title/?title_type=feature&release_date=1990-01-01,2022-02-23&user_rating=6.0,&start=1&ref_=adv_nxt
         string url = "https://www.imdb.com/search/title/?title_type=feature&release_date=1990-01-01,2022-02-23&user_rating=6.0,&start="
@@ -35,6 +35,7 @@ public class MovieRandomService {
             rating = rating.Replace("\n", "");
             rating = rating.Replace(" ", "");
             string description = node.Descendants("p").Where(p => p.HasClass("text-muted")).Last().InnerText;
+            description = description.Replace("... See full summary&nbsp;&raquo;", "... read full summary at imdb.");
             description = description.Replace("\n", "");
             string link = "https://www.imdb.com" + node.Element("h3").SelectSingleNode("a").GetAttributeValue("href", string.Empty);
             link = link.Replace("?ref_=adv_li_tt", "");
